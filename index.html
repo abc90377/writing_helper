@@ -1,0 +1,107 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Writing Helper</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"
+    integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+    integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/"
+    crossorigin="anonymous"></script>
+<style>
+    body {
+        max-width: 100%;
+    }
+
+    textarea {
+        width: 100%;
+        /* height:100px; */
+        outline: 0;
+        line-height: 1.6;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
+    br {
+        display: block;
+        /* makes it have a width */
+        content: "";
+        /* clears default height */
+        margin-top: 5px;
+        /* change this to whatever height you want it */
+    }
+
+    .text {
+        width: 100%;
+        height: 300px;
+        /* resize: none; */
+        overflow-y: scroll;
+        outline: 0;
+        border: 5px solid #dbdfe4;
+        border-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    #fullArticle{
+        height: 600px;
+
+    }
+
+    .NewText {
+        color: rgb(76, 76, 200);
+    }
+</style>
+
+<body>
+    <div>
+        <div id="textShow">
+        </div>
+        <div>
+            <textarea class="text" id="textInput" cols="30"></textarea>
+        </div>
+        <div class="toolbox">
+            <button class="btn btn-sm btn-outline-dark" onclick="add('\r\n請翻譯成英文，時態用現在式:')">翻譯</button>
+            <button class="btn btn-sm btn-outline-dark" onclick="add('\r\n改進文章的語法和用字，以成為英語母語人士的語言風格:')">改進</button>
+            <button class="btn btn-sm btn-outline-dark" onclick="add('\r\n請判斷以下文章是否為母語者撰寫，並給出原因:')">判斷</button>
+            <button class="btn btn-sm btn-outline-dark" onclick="add('\r\n劇情接下來有這幾種走向，請你分別寫一小段每種走向後的故事分岐:')">劇情分岐</button>
+            <!-- <br> -->
+                <input type="button" class="btn btn-dark" onclick="copy()" value="複製">
+                <input type="button" class="btn btn-dark" onclick="clearText()" value="清除">
+        </div>
+        <textarea class="text" id="textOutput" cols="30"></textarea>
+        <div class="toolbox ">
+                <input type="button" class="btn btn-dark" onclick="edit()" value="編輯">
+                <input type="button" class="btn btn-dark" onclick="finish()" value="完成">
+        </div>
+        <div>
+            <textarea class="text" id="fullArticle" cols="30"></textarea>
+        </div>
+
+    </div>
+</body>
+<script>
+    fulltext = ''
+    function add(text) {
+        $('#textInput').val($('#textInput').val()+text);
+    }
+    function finish() {
+        $('#fullArticle').val($('#fullArticle').val()+"\r\n"+$('#textOutput').val());
+    }
+    function clearText() {
+        $('#textInput').val('');
+    }
+    function copy(text) {
+        $('#textInput').select();
+        document.execCommand("copy");
+    }
+    function edit() {
+        $('#textInput').val($('#textOutput').val());
+        $('#textOutput').val('')
+    }
+</script>
